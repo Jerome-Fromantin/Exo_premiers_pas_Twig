@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}ALIPTIC - Exercice TWIG{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" type="image/png" href="assets/icon.png"/>
+        <style>.bg-img1{border-left:50px solid #1FC4F4;}</style>
+        
+        {% block stylesheets %}
+            <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;700&amp;display=swap" rel="stylesheet">
+            <link rel="stylesheet" type="text/css" href="assets/bootstrap.min.css">
+            <link href="assets/style.css" rel="stylesheet">
+        {% endblock %}
+    </head>
+    <body>
+        {% block body %}
+            <div class="bg-img1 size1 flex-w flex-c-m p-t-20 p-b-55 p-l-15 p-r-15">
+                <div class="wsize1 bor1 bg1 p-b-45 p-l-15 p-r-15 p-t-20 respon1">
+                    <div class="wrappic1">
+                        <img src="assets/logo.png" alt="Logo ALIPTIC">
+                    </div>
+                    <p class="txt-center m1-txt1 p-t-33 p-b-68">
+                        Exercice TWIG
+                    </p>
+
+                    <div class="container row">
+                        {% for user in users %}
+                            <div class="card col-4">
+                                <img class="card-img-top" src={{ user.picture.medium }}
+                                alt="Image de {{ user.name.first }}" />
+
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        Bonjour, mon nom est {{ user.name.first|capitalize }} {{ user.name.last|upper }}.
+                                    </h5>
+                                    <p class="card-text">
+                                        J'habite "{{ user.location.state|upper }}", dans une ville qui s'appelle
+                                        "{{ user.location.city|upper }}"<br><br>
+                                    </p>
+                                    <p class="card-text">
+                                        <small class="text-muted">
+                                            Mon adresse e-mail est <a href="mailto:{{ user.email }}"
+                                            title="Envoyer un email à {{ user.name.first|capitalize }}">{{ user.email }}</a>,
+                                            dont le mot de passe est "{{ user.login.password }}".
+                                        </small>
+                                    </p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% endblock %}
+
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>
